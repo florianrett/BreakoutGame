@@ -2,13 +2,15 @@
 
 
 #include "Block.h"
+#include "Components/BoxComponent.h"
 
-// Sets default values
-ABlock::ABlock()
+ABlock::ABlock(const FObjectInitializer& ObjectInitializer)
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Disable actor tick for all blocks to improve performance
 	PrimaryActorTick.bCanEverTick = false;
 
+	TObjectPtr<UBoxComponent> Collider = CreateDefaultSubobject<UBoxComponent>(FName("Collider"));
+	Collider->SetCollisionProfileName(FName("BlockAll"));
+	Collider->SetBoxExtent(FVector(50, 50, 50));
+	RootComponent = Collider;
 }
-
-

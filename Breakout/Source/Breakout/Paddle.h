@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
 #include "Paddle.generated.h"
 
@@ -15,12 +16,18 @@ public:
 	// Sets default values for this actor's properties
 	APaddle();
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-public:	
+	virtual void OnConstruction(const FTransform& Transform) override;
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+protected:
+	// The paddle's collider
+	UPROPERTY()
+	TObjectPtr<UBoxComponent> Collider;
+	
+	// Size of the paddle
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FVector2D PaddleSize;
 
 };

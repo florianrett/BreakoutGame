@@ -2,4 +2,14 @@
 
 
 #include "BreakoutPlayerController.h"
+#include "Paddle.h"
 
+ABreakoutPlayerController::ABreakoutPlayerController()
+{
+	
+}
+
+void ABreakoutPlayerController::SetControlledPaddle(APaddle* Paddle)
+{
+	ControlledPaddle = Paddle;
+}

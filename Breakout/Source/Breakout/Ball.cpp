@@ -3,25 +3,22 @@
 
 #include "Ball.h"
 
+#include "Components/SphereComponent.h"
+
 // Sets default values
 ABall::ABall()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	Radius = 20.f;
 
+	Collider = CreateDefaultSubobject<USphereComponent>(FName("Collider"));
+	Collider->SetCollisionProfileName(TEXT("Ball"));
+	RootComponent = Collider;
 }
 
-// Called when the game starts or when spawned
-void ABall::BeginPlay()
+void ABall::OnConstruction(const FTransform& Transform)
 {
-	Super::BeginPlay();
-	
+	Super::OnConstruction(Transform);
+
+	Collider->SetSphereRadius(Radius);
 }
-
-// Called every frame
-void ABall::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-

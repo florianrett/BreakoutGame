@@ -3,20 +3,27 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "BallCollision.h"
 #include "GameFramework/Actor.h"
 #include "Block.generated.h"
 
 UCLASS()
-class BREAKOUT_API ABlock : public AActor
+class BREAKOUT_API ABlock : public AActor, public IBallCollision
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	ABlock();
+	ABlock(const FObjectInitializer& ObjectInitializer);
 
-protected:
-
-public:	
+	//------------------------------
+	// Override IBallCollision
+	//------------------------------
+	
+	//------------------------------
+	// ~End Override IBallCollision
+	//------------------------------
+	
+	
 
 };

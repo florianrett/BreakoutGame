@@ -15,12 +15,19 @@ public:
 	// Sets default values for this actor's properties
 	ABall();
 
+	// Called every time a ball is constructed, both in editor and at runtime
+	virtual void OnConstruction(const FTransform& Transform) override;
+
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	// The ball's radius. For reference, blocks have a default size of 100 units
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float Radius;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+	// Sphere component to handle ball collision
+	UPROPERTY()
+	TObjectPtr<class USphereComponent> Collider;
 
+	// The balls current velocity
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FVector2D Velocity;
 };
