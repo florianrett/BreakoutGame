@@ -23,6 +23,7 @@ class BREAKOUT_API IBallCollision
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
+	// Get the balls new velocity after collision.
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	FVector2D GetNewDirection();
+	FVector2D GetNewVelocity(const FVector2D& CurrentVelocity, const FHitResult& Hit);
 };

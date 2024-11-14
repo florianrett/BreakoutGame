@@ -18,7 +18,12 @@ public:
 	// Called every time a ball is constructed, both in editor and at runtime
 	virtual void OnConstruction(const FTransform& Transform) override;
 
+	virtual void Tick(float DeltaSeconds) override;
+
 protected:
+	// Move the ball for DeltaSeconds seconds
+	void MoveBall(float DeltaSeconds);
+	
 	// The ball's radius. For reference, blocks have a default size of 100 units
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float Radius;
