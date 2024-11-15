@@ -51,6 +51,7 @@ void ABreakoutGameMode::BeginPlay()
 
 	// Setup and start the game
 	SetupBlocks();
+	SetupBalls();
 	SetupPaddle();
 }
 
@@ -80,9 +81,26 @@ void ABreakoutGameMode::SetupBalls_Implementation()
 	}
 }
 
+void ABreakoutGameMode::RemoveBall(const ABall* Ball)
+{
+	Balls.Remove(Ball);
+
+	CheckWinLoseConditions();
+}
+
 void ABreakoutGameMode::RegisterBlock(ABlock* Block)
 {
 	Blocks.Add(Block);
+	Block->OnBlockDestroyed.AddDynamic(this, &ABreakoutGameMode::DestroyBlock);
+}
+
+void ABreakoutGameMode::DestroyBlock(const ABlock* Block)
+{
+	TotalScore += Block->GetScore();
+	GameWidget->SetScore(TotalScore);
+	Blocks.Remove(Block);
+
+	CheckWinLoseConditions();
 }
 
 void ABreakoutGameMode::SetupPaddle_Implementation()
@@ -108,6 +126,7 @@ void ABreakoutGameMode::SetupPaddle_Implementation()
 void ABreakoutGameMode::AddBall(ABall* Ball)
 {
 	Balls.Add(Ball);
+	Ball->OnBallLost.AddDynamic(this, &ABreakoutGameMode::RemoveBall);
 }
 
 void ABreakoutGameMode::RestartGame()
@@ -131,4 +150,20 @@ void ABreakoutGameMode::CycleCamera()
 	CurrentCameraIndex %= Cameras.Num();
 
 	GetWorld()->GetFirstPlayerController()->SetViewTarget(Cameras[CurrentCameraIndex]);
+}
+
+void ABreakoutGameMode::CheckWinLoseConditions()
+{
+	if (Blocks.Num() == 0)
+	{
+		// Game won
+		GameWidget->SetResultText(TEXT("YOU WON!"));
+		GameWidget->SetButtonVisibility(true);
+	}
+	else if (Balls.Num() == 0)
+	{
+		// Game lost
+		GameWidget->SetResultText(TEXT("YOU LOST!"));
+		GameWidget->SetButtonVisibility(true);
+	}
 }

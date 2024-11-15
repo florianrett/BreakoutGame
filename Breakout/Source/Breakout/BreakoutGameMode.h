@@ -50,9 +50,16 @@ protected:
 	UFUNCTION(BlueprintNativeEvent)
 	void SetupBalls();
 
+	UFUNCTION(BlueprintCallable)
+	void RemoveBall(const ABall* Ball);
+
 	// Add a Block to be tracked as part of the current level
 	UFUNCTION(BlueprintCallable)
 	void RegisterBlock(ABlock* Block);
+
+	// Destroy a block
+	UFUNCTION(BlueprintCallable)
+	void DestroyBlock(const ABlock* Block);
 
 	/**
 	 * Setup Paddle and input routing.
@@ -69,11 +76,16 @@ protected:
 
 	void CycleCamera();
 
+	void CheckWinLoseConditions();
+
 	// CameraActors that can server as potential view targets
 	UPROPERTY()
 	TArray<ACameraActor*> Cameras;
 
 	int32 CurrentCameraIndex = -1;
+
+	UPROPERTY(BlueprintReadOnly)
+	int32 TotalScore = 0;
 
 	// All Balls that are currently in the game
 	UPROPERTY(BlueprintReadOnly)

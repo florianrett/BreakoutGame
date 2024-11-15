@@ -25,8 +25,13 @@ public:
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
 	TObjectPtr<UTextBlock> ScoreText;
 
+	UPROPERTY(EditAnywhere, meta = (BindWidget))
+	TObjectPtr<UTextBlock> ResultText;	
+
 	void SetScore(int32 NewScore);
 
 	void SetButtonVisibility(bool bVisible);
+
+	void SetResultText(const FString& Result);
 	
 };

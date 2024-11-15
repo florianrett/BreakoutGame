@@ -13,4 +13,10 @@ void UGameWidget::SetButtonVisibility(bool bVisible)
 	const ESlateVisibility NewVisibility = bVisible ? ESlateVisibility::Visible : ESlateVisibility::Hidden;
 	ExitButton->SetVisibility(NewVisibility);
 	RestartButton->SetVisibility(NewVisibility);
+	ResultText->SetVisibility(NewVisibility);
+}
+
+void UGameWidget::SetResultText(const FString& Result)
+{
+	ResultText->SetText(FText::FromString(Result));
 }

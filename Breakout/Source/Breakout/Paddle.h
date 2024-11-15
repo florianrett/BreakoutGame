@@ -25,7 +25,7 @@ public:
 	//------------------------------
 	// Override IBallCollision
 	//------------------------------
-	virtual FVector2D GetNewVelocity_Implementation(const FVector2D& CurrentVelocity, const FHitResult& Hit) override;
+	virtual FVector2D GetNewVelocity_Implementation(const FVector2D& CurrentVelocity, const FHitResult& Hit) const override;
 	//------------------------------
 	// ~End Override IBallCollision
 	//------------------------------

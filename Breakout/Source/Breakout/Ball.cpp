@@ -28,7 +28,16 @@ void ABall::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	MoveBall(DeltaSeconds);	
+	MoveBall(DeltaSeconds);
+	if (CheckBallDestruction())
+	{
+		SetActorEnableCollision(false);
+		SetActorHiddenInGame(true);
+		OnBallLost.Broadcast(this);
+		SetLifeSpan(2.0f);
+		SetActorTickEnabled(false); // Disable further ticking while ball is being destroyed
+		UE_LOG(LogTemp, Warning, TEXT("Ball Lost %s"), *GetNameSafe(this));
+	}
 }
 
 void ABall::MoveBall(float DeltaSeconds)
@@ -43,6 +52,9 @@ void ABall::MoveBall(float DeltaSeconds)
 		{
 			// If the hit object implements IBallCollision interface it can override the ball's new velocity
 			Velocity = IBallCollision::Execute_GetNewVelocity(Hit.GetActor(), Velocity, Hit);
+
+			// Notify the hit object so it can react accordingly
+			IBallCollision::Execute_ProcessHit(Hit.GetActor());
 		}
 		else
 		{
@@ -59,4 +71,14 @@ void ABall::MoveBall(float DeltaSeconds)
 			MoveBall(RemainingTime * DeltaSeconds);
 		}
 	}
+}
+
+bool ABall::CheckBallDestruction_Implementation()
+{
+	if (GetActorLocation().Z <= 0)
+	{
+		return true;
+	}
+
+	return false;
 }

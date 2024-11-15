@@ -25,5 +25,9 @@ public:
 
 	// Get the balls new velocity after collision.
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	FVector2D GetNewVelocity(const FVector2D& CurrentVelocity, const FHitResult& Hit);
+	FVector2D GetNewVelocity(const FVector2D& CurrentVelocity, const FHitResult& Hit) const;
+
+	// Process being hit by a ball
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+	void ProcessHit();
 };

@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Ball.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBallLostDelegate, const ABall*, Ball);
+
 UCLASS()
 class BREAKOUT_API ABall : public AActor
 {
@@ -20,9 +22,16 @@ public:
 
 	virtual void Tick(float DeltaSeconds) override;
 
+	UPROPERTY(BlueprintAssignable)
+	FBallLostDelegate OnBallLost;
+
 protected:
 	// Move the ball for DeltaSeconds seconds
 	void MoveBall(float DeltaSeconds);
+
+	// Determine whether the ball is lost and needs to be destroyed
+	UFUNCTION(BlueprintNativeEvent)
+	bool CheckBallDestruction();
 	
 	// The ball's radius. For reference, blocks have a default size of 100 units
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)

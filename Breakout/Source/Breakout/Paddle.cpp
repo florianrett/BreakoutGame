@@ -31,10 +31,11 @@ void APaddle::Tick(float DeltaTime)
 
 	// Paddle Movement
 	FVector TargetPos = GetActorLocation() + FVector(CurrentMovementInput * DeltaTime * MovementSpeed, 0.0f, 0.0f);
-	SetActorLocation(TargetPos, true);
+	FHitResult Hit;
+	SetActorLocation(TargetPos, true, &Hit);
 }
 
-FVector2D APaddle::GetNewVelocity_Implementation(const FVector2D& CurrentVelocity, const FHitResult& Hit)
+FVector2D APaddle::GetNewVelocity_Implementation(const FVector2D& CurrentVelocity, const FHitResult& Hit) const
 {
 	// Set the new direction based on impact location along the paddle
 	const float Speed = CurrentVelocity.Length();
