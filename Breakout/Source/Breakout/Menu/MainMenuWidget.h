@@ -19,6 +19,9 @@ public:
 	TObjectPtr<UButton> PlayButton;
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	TObjectPtr<UButton> PlayRandomButton;
+	
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	TObjectPtr<UButton> ExitButton;
 	
 };

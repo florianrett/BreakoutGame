@@ -33,6 +33,7 @@ void ABreakoutGameMode::BeginPlay()
 			GameWidget->AddToViewport();
 			GameWidget->RestartButton->OnClicked.AddDynamic(this, &ABreakoutGameMode::RestartGame);
 			GameWidget->ExitButton->OnClicked.AddDynamic(this, &ABreakoutGameMode::ExitGame);
+			GameWidget->CameraSwitchButton->OnClicked.AddDynamic(this, &ABreakoutGameMode::CycleCamera);
 			GetWorld()->GetFirstPlayerController()->SetShowMouseCursor(true);
 		}
 	}

@@ -25,9 +25,15 @@ public:
 	UPROPERTY(EditDefaultsOnly)
 	TSoftObjectPtr<UWorld> GameLevel;
 
+	// The game level to load when pressing random play
+	UPROPERTY(EditDefaultsOnly)
+	TSoftObjectPtr<UWorld> GameLevelRandom;
+
 protected:
 	UFUNCTION()
 	void StartGame();
+	UFUNCTION()
+	void StartGameRandom();
 	UFUNCTION()
 	void ExitGame();
 	

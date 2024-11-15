@@ -17,6 +17,7 @@ void AMenuGameMode::BeginPlay()
 		{
 			MenuWidget->AddToViewport();
 			MenuWidget->PlayButton->OnClicked.AddDynamic(this, &AMenuGameMode::StartGame);
+			MenuWidget->PlayRandomButton->OnClicked.AddDynamic(this, &AMenuGameMode::StartGameRandom);
 			MenuWidget->ExitButton->OnClicked.AddDynamic(this, &AMenuGameMode::ExitGame);
 			GetWorld()->GetFirstPlayerController()->SetShowMouseCursor(true);
 		}
@@ -37,6 +38,18 @@ void AMenuGameMode::StartGame()
 	}
 	
 	UGameplayStatics::OpenLevelBySoftObjectPtr(this, GameLevel, true);
+}
+
+void AMenuGameMode::StartGameRandom()
+{
+	if (GameLevel.IsNull())
+	{
+		UE_LOG(LogTemp, Error, TEXT("Specified GameLevelRandom is not valid!"));
+
+		return;
+	}
+
+	UGameplayStatics::OpenLevelBySoftObjectPtr(this, GameLevelRandom, true);
 }
 
 void AMenuGameMode::ExitGame()

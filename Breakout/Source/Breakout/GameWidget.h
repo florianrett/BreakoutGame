@@ -21,6 +21,9 @@ public:
 	
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
 	TObjectPtr<UButton> ExitButton;
+	
+	UPROPERTY(EditAnywhere, meta = (BindWidget))
+	TObjectPtr<UButton> CameraSwitchButton;
 
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
 	TObjectPtr<UTextBlock> ScoreText;

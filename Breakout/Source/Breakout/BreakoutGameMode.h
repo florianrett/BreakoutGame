@@ -74,6 +74,7 @@ protected:
 	UFUNCTION()
 	void ExitGame();
 
+	UFUNCTION()
 	void CycleCamera();
 
 	void CheckWinLoseConditions();
