@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Math/UnitConversion.h"
 #include "Ball.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FBallLostDelegate, const ABall*, Ball);
@@ -24,6 +25,16 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FBallLostDelegate OnBallLost;
+
+	// Set the ball's velocity to a specific value
+	UFUNCTION(BlueprintCallable)
+	void SetVelocity(const FVector2D& NewVelocity);
+
+	UFUNCTION(BlueprintCallable)
+	float GetSpeed() const
+	{
+		return Velocity.Length();
+	}
 
 protected:
 	// Move the ball for DeltaSeconds seconds

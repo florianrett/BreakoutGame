@@ -36,8 +36,12 @@ void ABall::Tick(float DeltaSeconds)
 		OnBallLost.Broadcast(this);
 		SetLifeSpan(2.0f);
 		SetActorTickEnabled(false); // Disable further ticking while ball is being destroyed
-		UE_LOG(LogTemp, Warning, TEXT("Ball Lost %s"), *GetNameSafe(this));
 	}
+}
+
+void ABall::SetVelocity(const FVector2D& NewVelocity)
+{
+	Velocity = NewVelocity;
 }
 
 void ABall::MoveBall(float DeltaSeconds)

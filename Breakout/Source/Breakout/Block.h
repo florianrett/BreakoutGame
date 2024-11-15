@@ -16,12 +16,14 @@ class BREAKOUT_API ABlock : public AActor, public IBallCollision
 	
 public:	
 	// Sets default values for this actor's properties
-	ABlock(const FObjectInitializer& ObjectInitializer);
+	ABlock();
 
 	//------------------------------
 	// Override IBallCollision
 	//------------------------------
+	// Calculate the ball's new velocity after colliding with this block
 	virtual FVector2D GetNewVelocity_Implementation(const FVector2D& CurrentVelocity, const FHitResult& Hit) const override;
+	// Called when the block is hit by a ball
 	virtual void ProcessHit_Implementation() override;
 	//------------------------------
 	// ~End Override IBallCollision

@@ -4,7 +4,7 @@
 #include "Block.h"
 #include "Components/BoxComponent.h"
 
-ABlock::ABlock(const FObjectInitializer& ObjectInitializer)
+ABlock::ABlock()
 {
 	// Disable actor tick for all blocks to improve performance
 	PrimaryActorTick.bCanEverTick = false;
